@@ -15,9 +15,9 @@ class CuentaTest {
         //cuenta.setPersona("Andres");
         String esperado = "Andres";
         String actual = cuenta.getPersona();
-        assertNotNull(actual);
-        assertEquals(esperado, actual);
-        assertEquals("Andres", actual);
+        assertNotNull(actual, () -> "La cuenta no puede ser nula");
+        assertEquals(esperado, actual, () -> "El nombre de la cuenta no es el que se esperaba");
+        assertEquals("Andres", actual, () -> "El nombre de cuenta esperada debe ser igual a la real");
     }
 
     @Test
