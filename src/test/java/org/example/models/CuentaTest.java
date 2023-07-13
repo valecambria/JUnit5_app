@@ -1,6 +1,8 @@
 package org.example.models;
 
 import org.example.exceptions.DineroInsuficienteException;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -10,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CuentaTest {
 
     @Test
+    @DisplayName("Probando nombre de la cuenta corriente")
     void testNombreCuenta() {
         Cuenta cuenta = new Cuenta("Andres", new BigDecimal("1000.12345"));
         //cuenta.setPersona("Andres");
@@ -75,8 +78,11 @@ class CuentaTest {
         assertEquals("1000", cuenta2.getSaldo().toPlainString());
         assertEquals("3000", cuenta1.getSaldo().toPlainString());
     }
+    
     @Test
+    @Disabled
     void testRelacionBancoCuentas() {
+        fail(); //Fuerzo un error para utilizar el disabled
         Cuenta cuenta1 = new Cuenta("John Doe", new BigDecimal("2500"));
         Cuenta cuenta2 = new Cuenta("Valentino", new BigDecimal("1500"));
 
