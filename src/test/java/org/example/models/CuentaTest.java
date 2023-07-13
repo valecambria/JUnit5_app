@@ -1,15 +1,21 @@
 package org.example.models;
 
 import org.example.exceptions.DineroInsuficienteException;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CuentaTest {
+    @BeforeEach
+    void initMetodoTest(){
+        System.out.println("Iniciando el método");
+    }
+    @AfterEach
+    void tearDown(){
+        System.out.println("Finalizando el método");
+    }
 
     @Test
     @DisplayName("Probando nombre de la cuenta corriente")
@@ -78,7 +84,7 @@ class CuentaTest {
         assertEquals("1000", cuenta2.getSaldo().toPlainString());
         assertEquals("3000", cuenta1.getSaldo().toPlainString());
     }
-    
+
     @Test
     @Disabled
     void testRelacionBancoCuentas() {
