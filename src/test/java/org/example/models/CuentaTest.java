@@ -16,7 +16,14 @@ class CuentaTest {
     void tearDown(){
         System.out.println("Finalizando el método");
     }
-
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("Iniciando el test");
+    }
+    @AfterAll
+    static void afterAll() {
+        System.out.println("Finalizando el test");
+    }
     @Test
     @DisplayName("Probando nombre de la cuenta corriente")
     void testNombreCuenta() {
