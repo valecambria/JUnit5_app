@@ -3,8 +3,11 @@ package org.example.models;
 import org.example.exceptions.DineroInsuficienteException;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -172,4 +175,25 @@ class CuentaTest {
         @EnabledIfSystemProperty(named = "ENV", matches = "dev") //Solo se ejecuta cuando sea desarrollo
         void testDev(){
         }
+
+        @Test
+        void imprimirVariablesAmbiente(){
+            Map<String, String> getenv = System.getenv();//Retorna un mapa de JAVA del tipo string
+            getenv.forEach((k, v) -> System.out.println(k + ": " + v));
+        }
+
+        @Test
+        @EnabledIfEnvironmentVariable(named = "%JAVA_HOME%", matches = ".*jdk-17.*")
+        void testJavaHome(){
+        }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"100", "200", "300", "500", "700", "1000"})
+    void testDebitoCuentaParametrizado(String monto) {
+        Cuenta cuenta = new Cuenta("Valentino", new BigDecimal("1000.12345"));
+        cuenta.debito(new BigDecimal(monto));
+        assertNotNull(cuenta.getSaldo());
+        assertTrue( cuenta.getSaldo().compareTo(BigDecimal.ZERO) > 0);
+    }
+
 }
