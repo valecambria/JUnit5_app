@@ -2,8 +2,10 @@ package org.example.models;
 
 import org.example.exceptions.DineroInsuficienteException;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.*;
 
 import java.math.BigDecimal;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -127,4 +129,47 @@ class CuentaTest {
             });
     }
 
+    @Test
+    @EnabledOnOs(OS.WINDOWS)
+        void testSoloWindows(){
+        }
+        @Test
+        @EnabledOnOs({OS.LINUX, OS.MAC })
+            void testSoloLinux(){
+        }
+        @Test
+        @DisabledOnOs(OS.WINDOWS)
+            void testNoWindows(){
+        }
+
+        @Test
+        @EnabledOnJre(JRE.JAVA_8)
+            void soloJdk8(){
+        }
+
+        @Test
+        void imprimirSystemProperties(){
+            Properties properties = System.getProperties();
+            properties.forEach((k , v) -> System.out.println("k = " + v));
+        }
+
+        @Test
+        @EnabledIfSystemProperty(named = "java.version", matches = ".*17.*")
+        void testJavaVersion(){
+        }
+
+        @Test
+        @DisabledIfSystemProperty(named = "os.arch", matches = ".*32.*")
+        void solo64(){
+        }
+
+        @Test
+        @EnabledIfSystemProperty(named = "os.arch", matches = ".*32.*")
+        void No64(){
+        }
+
+        @Test
+        @EnabledIfSystemProperty(named = "ENV", matches = "dev") //Solo se ejecuta cuando sea desarrollo
+        void testDev(){
+        }
 }
