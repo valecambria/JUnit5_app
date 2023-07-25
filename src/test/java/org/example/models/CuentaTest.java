@@ -58,6 +58,7 @@ class CuentaTest {
         //assertNotEquals(cuenta, cuenta2);
     }
 
+    @Tag("cuenta")
     @Test
     void testDebitoCuenta() {
         Cuenta cuenta = new Cuenta("Valentino", new BigDecimal("1000.12345"));
@@ -66,6 +67,7 @@ class CuentaTest {
         assertEquals(900, cuenta.getSaldo().intValue());
         assertEquals("900.12345", cuenta.getSaldo().toPlainString());
     }
+    @Tag("cuenta")
     @Test
     void testCreditoCuenta() {
         Cuenta cuenta = new Cuenta("Valentino", new BigDecimal("1000.12345"));
@@ -74,7 +76,8 @@ class CuentaTest {
         assertEquals(1100, cuenta.getSaldo().intValue());
         assertEquals("1100.12345", cuenta.getSaldo().toPlainString());
     }
-
+    @Tag("cuenta")
+    @Tag("error")
     @Test
     void testDineroInsuficienteExceptionCuenta() {
         Cuenta cuenta = new Cuenta("Valentino", new BigDecimal("1000.12345"));
@@ -85,7 +88,8 @@ class CuentaTest {
         String esperado = "Dinero Insuficiente";
         assertEquals(esperado, actual);
     }
-
+    @Tag("cuenta")
+    @Tag("banco")
     @Test
     void testTransferirDineroCuentas() {
         Cuenta cuenta1 = new Cuenta("John Doe", new BigDecimal("2500"));
