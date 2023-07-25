@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -200,4 +201,18 @@ class CuentaTest {
         assertTrue( cuenta.getSaldo().compareTo(BigDecimal.ZERO) > 0);
     }
 
+    @Nested
+    @Tag("timeout")
+    class EjemploTimeOutTest{
+        @Test
+        @Timeout(5)
+        void testTimeout() throws InterruptedException{
+            TimeUnit.SECONDS.sleep(5); //Simulo una carga pesada con el metodo timeunit
+        }
+        @Test
+        @Timeout(value = 5, unit = TimeUnit.SECONDS)
+        void testTimeOut2() throws InterruptedException {
+            TimeUnit.SECONDS.sleep(5);
+        }
+}
 }
